@@ -1,0 +1,13 @@
+name: px4-sim
+
+services:
+  gazebo:
+    build: .
+    environment:
+      - DISPLAY=:0
+    volumes:
+      - ./src/PX4-Autopilot:/src/PX4-Autopilot/:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+    network_mode: host
+    privileged: true
+    command: "bash -c 'cd /src/PX4-Autopilot && make px4_sitl gz_x500'"
